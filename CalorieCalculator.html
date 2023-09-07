@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://kit.fontawesome.com/8cd36af7b2.css" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/8cd36af7b2.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="ccstyle.css"></link>
+    </head>
+    <body>
+        <h2>Calories Calculator</h3>
+        <form >
+            <label for="ht">Height (in cms)</label>
+            <input type="text" id="ht" name="ht" required oninput="validationh()"><span id="hno"></span><br>
+            <label for="wt">Weight (in kgs)</label>
+            <input type="text" id="wt" name="wt" required oninput="validationw()"><span id="wno"></span><br>
+            <label for="age">Age (in yrs)</label>&nbsp&nbsp&nbsp&nbsp&nbsp;
+            <input type="text" id="age" name="age" required oninput="validationa()"><span id="ano"></span><br>
+            <span>Gender</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;
+            <input type="radio" id="fl" name="Gender" value="Female">
+            <label for id="f1">Female</label>
+            <input type="radio" id="ml" name="Gender" value="Male">
+            <label for id="ml">Male</label><br>
+            <button id="calmtr" onclick= "CaloriesCalc(event)">Calculate <i class="fa-sharp fa-solid fa-calculator"></i></button>
+            </form>
+            <p id="op"></p>
+            
+             <script>
+                  function CaloriesCalc(event)
+                {                
+                let Height = document.getElementById("ht").value;
+                let Weight = document.getElementById("wt").value;
+                let age = document.getElementById("age").value;
+                let gender = document.querySelector('input[name="Gender"]:checked').value;
+                let BMR;
+              
+                
+                    if (gender === 'Female')
+                    {
+                        
+                        BMR = 655.1 + (9.563 * Weight) + (1.850 * Height) - (4.676 * age);
+                    }
+                    else if(gender === 'Male')
+                    {
+                        BMR = 66.47 + (13.75 * Weight) + (5.033 * Height) - (6.755 * age);
+                    }
+                        BMR = Math.round(BMR);
+                        localStorage.setItem("BMR", BMR); 
+                     document.getElementById("op").innerHTML=BMR+" Calories";
+                     event.preventDefault()
+                    }
+
+                    function validationh()
+                    {
+                        var m = Number(document.getElementById("ht").value);
+                        if(isNaN(m))
+                        {
+                            document.getElementById("hno").innerHTML = "Please enter numbers only";   
+                            return false;
+                        }
+                        {
+                            document.getElementById("hno").innerHTML = ""; 
+                        }
+                    }
+
+                    function validationw()
+                    {
+                        var n = Number(document.getElementById("wt").value);
+                        if(isNaN(n))
+                        {
+                            document.getElementById("wno").innerHTML = "Please enter numbers only";   
+                            return false;
+                        }
+                        else
+                        {
+                            document.getElementById("wno").innerHTML = ""; 
+                        }
+                    }
+
+                    function validationa()
+                    {
+                        var o = Number(document.getElementById("age").value);
+                        if(isNaN(o))
+                        {
+                            document.getElementById("ano").innerHTML = "Please enter numbers only";  
+                            return false; 
+                        }
+                        else
+                        {
+                            document.getElementById("ano").innerHTML = ""; 
+                        }
+                    }
+
+                </script>
+       
+    </body>
+</html>

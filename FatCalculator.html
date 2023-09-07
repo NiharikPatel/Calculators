@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Fat Calculator</title>
+   <link rel="stylesheet" href="ccstyle.css"></link>
+</head>
+<body>
+    <h2>Fat Calculator</h2>
+    <form>
+        <label for="ht">Height (in cms)</label>
+        <input type="text" id="ht" name="ht" required oninput="validationh()"><span id="hno"></span><br>
+        <label for="wt">Weight (in kgs)</label>
+        <input type="text" id="wt" name="wt" required oninput="validationw()"><span id="wno"></span><br>
+        <label for="age">Age (in yrs)</label>&nbsp&nbsp&nbsp&nbsp&nbsp;
+        <input type="text" id="age" name="age" required oninput="validationa()"><span id="ano"></span><br>
+        <span>Gender</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;
+        <input type="radio" id="fl" name="Gender" value="Female">
+        <label for id="f1">Female</label>
+        <input type="radio" id="ml" name="Gender" value="Male">
+        <label for id="ml">Male</label><br>
+        <button id="fatcal" onclick="fatcalc()">Calculate</button>
+        <p id="op"></p>
+        
+    </form>
+    <script>
+               
+                function fatcalc()
+                {        
+                let Height = (document.getElementById("ht").value)/100;
+                let Weight = document.getElementById("wt").value;
+                let age = document.getElementById("age").value;
+                let gender = document.querySelector('input[name="Gender"]:checked').value;
+                let BMI = (Weight)/(Math.pow(Height,2));
+                let BFP;
+
+                     if (gender === 'Male' && age>=18)
+                    {
+                        
+                        BFP = 1.20 * BMI + 0.23 * age -16.2;
+                    }
+                    else if(gender === 'Male' && age<18)
+                    {
+                        BFP = 1.51 * BMI - 0.70 * age - 2.2;
+                    }
+                    else if(gender === 'Female' && age>=18)
+                    {
+                        
+                        BFP = 1.20 * BMI + 0.23 * age -5.4;
+                    }
+                    else if(gender === 'Female' && age<18)
+                    {
+                        BFP = 1.51 * BMI - 0.70 * age +1.4;
+                    }
+
+                        BFP = Math.round(BFP);
+                        localStorage.setItem("BFP", BFP); 
+                     document.getElementById("op").innerHTML=BFP+" %";
+                     event.preventDefault()
+                    }
+
+                    function validationh()
+                    {
+                        var m = Number(document.getElementById("ht").value);
+                        if(isNaN(m))
+                        {
+                            document.getElementById("hno").innerHTML = "Please enter numbers only";   
+                            return false;
+                        }
+                        {
+                            document.getElementById("hno").innerHTML = ""; 
+                        }
+                    }
+
+                    function validationw()
+                    {
+                        var n = Number(document.getElementById("wt").value);
+                        if(isNaN(n))
+                        {
+                            document.getElementById("wno").innerHTML = "Please enter numbers only";   
+                            return false;
+                        }
+                        else
+                        {
+                            document.getElementById("wno").innerHTML = ""; 
+                        }
+                    }
+
+                    function validationa()
+                    {
+                        var o = Number(document.getElementById("age").value);
+                        if(isNaN(o))
+                        {
+                            document.getElementById("ano").innerHTML = "Please enter numbers only";  
+                            return false; 
+                        }
+                        else
+                        {
+                            document.getElementById("ano").innerHTML = ""; 
+                        }
+                    }
+    </script>
+
+
+</body>
+</html>
